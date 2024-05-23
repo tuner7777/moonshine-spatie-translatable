@@ -50,7 +50,8 @@ final class Translatable extends Json
      * @throws \Throwable
      */
     public function onlyValue(
-        string $value = 'Value'
+        string $value = 'Value',
+        ?Field $valueField = null,
     ): static
     {
         throw new FieldException('Can`t set onlyValue for this field!');
@@ -129,8 +130,12 @@ final class Translatable extends Json
         return $this;
     }
 
-    public function keyValue(string $key = 'Language', string $value = 'Value'): static
-    {
+    public function keyValue(
+        string $key = 'Language',
+        string $value = 'Value',
+        ?Field $keyField = null,
+        ?Field $valueField = null,
+    ): static {
         $this->fields([
             Select::make($key, 'key')
                 ->options(array_combine($this->getLanguagesCodes(),
